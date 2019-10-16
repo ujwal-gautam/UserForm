@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+		"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+		"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+
+	<!-- constant to define global resource bundle -->
+	<!-- <constant name="" value="global"></constant> -->
+	<constant name="struts.custom.i18n.resources" value="ApplicationResources" />
+	<constant name="struts.devMode" value="true" />
+
+	<package name="default" extends="json-default" namespace = "/">
+		<action name="studentDetails" class="com.student.struts.StudentAction" method ="saveStudent">
+			<result name="INSERT" type="json"></result>
+			<result name = "error">login.jsp</result>
+		</action>
+		<action name="report" class="com.student.struts.StudentAction" method="selectStudent">
+			<result name="SELECT" type="json"></result>
+			<result name = "error">login.jsp</result>
+		</action>
+		<action name="updateuser" class="com.student.struts.StudentAction" method="updateStudent">
+			<result name="UPDATE" type="json"></result>
+			<result name = "error">studentPage.jsp</result>
+		</action>
+		<action name="deleteuser" class="com.student.struts.StudentAction" method="deleteStudent">
+			<result name="UPDATE" type="json"></result>
+		</action>
+	</package>
+</struts>

@@ -20,7 +20,7 @@
 			<td colspan="2" align="center" style="padding-left:15px"><b>Student Login</b></td></tr>
 
 		<tr>
-			<td colspan="2" align="left" valign="middle" >
+			<td colspan="2" align="center" valign="middle" >
 				<div id="errorMsg" class="error_msg"></div>
 			</td>
 		</tr>

@@ -15,22 +15,16 @@ function validation_form() {
 
     if (studentId && studentId.value.length != 0 && regExStudentNumber.test(studentId.value) != true) {
         error_div.html("Please Enter the Number.");
-        focus = true;
-        studentId.focus();
+
         return false;
     }
-    if (firstName != null) {
-        if (!(firstName.value > 0)) {
+
+        if (firstName && !(firstName.value > 0)) {
             error_div.html("Please Enter the First Name.");
-            focus = true;
-            firstName.focus();
             return false;
         }
-    }
 	if(lastName && !(lastName.value > 0)){
 		error_div.html("Please Enter the Last Name.");
-		focus = true;
-		lastName.focus();
 		return false;
 	}
 	if(emailId && !(emailId.value > 0)){
@@ -55,6 +49,7 @@ function validation_form() {
 		"address" : address
 	}
 
+	console.log("ajax call");
 	$.ajax({
 		url : "studentDetails.action",
 		type : "POST",

@@ -18,6 +18,7 @@ public class OperationImp implements Operations{
 
 	public static final Logger logger = LogManager.getLogger(OperationImp.class);
 	JDBCConfig jdbcConfig = new JDBCConfig();
+	Student student = new Student();
 	
 //	String insertQuery = "insert into student values(?,?,?,?,?)";
 //	String selectQuery = "select * from student";
@@ -25,16 +26,19 @@ public class OperationImp implements Operations{
 //	String deleteQuery = "delete from student where student_id = ?";
 	
 	@Override
-	public Boolean save(String query, List<?> student) {
+	public Boolean save(String query, List<String> list) {
+
 		Boolean value = false;
 		try (PreparedStatement statement = jdbcConfig.databaseConfiguration().prepareStatement(query);){
-			
-			statement.setInt(0, ((Student) student).getStudentId());
-			statement.setString(1, ((Student) student).getFirstName());
-			statement.setString(2, ((Student) student).getLastName());
-			statement.setString(3, ((Student) student).getEmailId());
-			statement.setString(4, ((Student) student).getAddress());
-			
+			for (String list1 : list) {
+				int index = 0;
+				statement.setString(list1.indexOf(student.getStudentId()), list1);
+				statement.setString(list1.indexOf(student.getFirstName()), list1);
+				statement.setString(list1.indexOf(student.getLastName()), list1);
+				statement.setString(list1.indexOf(student.getEmailId()), list1);
+				statement.setString(list1.indexOf(student.getAddress()), list1);
+
+			}
 			int result = statement.executeUpdate();
 			
 			if(!(result == 0)) {
@@ -69,7 +73,7 @@ public class OperationImp implements Operations{
 				ResultSet result = statement.executeQuery()){
 			while(result.next()) {
 				
-				((Student) student).setStudentId(result.getInt("student_id"));
+				((Student) student).setStudentId(result.getString("student_id"));
 				((Student) student).setFirstName(result.getString("first_name"));
 				((Student) student).setLastName(result.getString("last_name"));
 				((Student) student).setEmailId(result.getString("email_id"));
@@ -99,7 +103,7 @@ public class OperationImp implements Operations{
 		Boolean value = false;
 		try(PreparedStatement statement = jdbcConfig.databaseConfiguration().prepareStatement(query);){
 			
-			statement.setInt(0, ((Student) student).getStudentId());
+			statement.setString(0, ((Student) student).getStudentId());
 			statement.setString(1, ((Student) student).getFirstName());
 			statement.setString(2, ((Student) student).getLastName());
 			statement.setString(3, ((Student) student).getEmailId());
@@ -134,7 +138,7 @@ public class OperationImp implements Operations{
 		Boolean value = false;
 		try(PreparedStatement statement = jdbcConfig.databaseConfiguration().prepareStatement(query)){
 			
-			statement.setInt(0, student.getStudentId());
+			statement.setString(0, student.getStudentId());
 			
 int result = statement.executeUpdate();
 			

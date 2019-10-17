@@ -19,7 +19,7 @@ function report() {
 				$("#tbody").html(tableData);
 			},
 			error: function(result){
-				alert("Some error occured.");
+				alert("Some error occurred.");
 			}
 		});
 	}
@@ -49,7 +49,7 @@ function updateNewRecord() {
 	}
 	$.ajax({
 		type:"POST",
-		url:"updateuser.action",
+		url:"updateUser.action",
         contentType : "application/json",
 		data:JSON.stringify(updateData),
         success:function(result){
@@ -57,7 +57,7 @@ function updateNewRecord() {
 			$("#resp").html(htl);
         },
         error: function(result){
-        	alert("Some error occured.");
+        	alert("Some error occurred.");
         }
 	});	
 }
@@ -67,7 +67,7 @@ function updateNewRecord() {
 function deleteUser(that) {	
 	$.ajax({
 		type:"POST",
-		url:"deleteuser.action",
+		url:"deleteUser.action",
 		 contentType : "application/json",
 		data:"studentId="+$(that).parent().prev().prev().prev().text(),
 		success: function(data){
@@ -80,7 +80,7 @@ function deleteUser(that) {
 			}
 		},
 		error:function(data){
-			alert("Some error occured.");
+			alert("Some error occurred.");
 		}
 	});
 }

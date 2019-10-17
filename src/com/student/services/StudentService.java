@@ -1,5 +1,6 @@
 package com.student.services;
 
+import com.student.DAO.OperationImp;
 import com.student.model.Student;
 
 import com.student.DAO.Operations;
@@ -15,19 +16,22 @@ public class StudentService {
 
 	public static final Logger logger = LogManager.getLogger(StudentService.class);
 	
-	private Operations operations ;
+	private OperationImp operations = new OperationImp();
 	Student student = new Student();
 
-	public StudentService(Operations operations) {
-		this.operations = operations;
-	}
+
 
 	public Boolean insertStudent(Student student) {
 		String insertQuery = "insert into student values(?,?,?,?,?)";
 		
-		List<?> students = new ArrayList<>();
-		
-		if(operations.save(insertQuery, students ) == true) {
+		List<String> list = new ArrayList<>();
+		list.add(student.getStudentId());
+		list.add(student.getFirstName());
+		list.add(student.getLastName());
+		list.add(student.getEmailId());
+		list.add(student.getAddress());
+
+		if(operations.save(insertQuery, list)) {
 			
 			return true;
 			
@@ -60,7 +64,7 @@ public class StudentService {
 		
 		List<?> students = new ArrayList<>();
 		
-		if(operations.updateData(query, students) == true) {
+		if(operations.updateData(query, students)) {
 			return true;
 		}
 		
